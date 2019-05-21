@@ -39,21 +39,21 @@ public class ShopDaoTest {
         shoper.setMessage("营业时间：周一至周日，11：00-03：00");
 
         //将图片文件转成二进制
-        byte[] btImg=new byte[1];
-        try{
-            File imageFile = new File("D:\\Myprojects\\IdeaProjects\\MyFirstSSM\\src\\main\\webapp\\images\\xiaolongkang.jpg");
-            InputStream inputStream=new FileInputStream(imageFile);
-            ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
-            byte[] buffer = new byte[10240];
-            int len=0;
-            while ((len=inputStream.read(buffer))!=-1){
-                outputStream.write(buffer,0,len);
-            }
-            inputStream.close();
-            btImg=outputStream.toByteArray();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        byte[] btImg=new byte[1];
+//        try{
+//            File imageFile = new File("D:\\Myprojects\\IdeaProjects\\MyFirstSSM\\src\\main\\webapp\\images\\xiaolongkang.jpg");
+//            InputStream inputStream=new FileInputStream(imageFile);
+//            ByteArrayOutputStream outputStream=new ByteArrayOutputStream();
+//            byte[] buffer = new byte[10240];
+//            int len=0;
+//            while ((len=inputStream.read(buffer))!=-1){
+//                outputStream.write(buffer,0,len);
+//            }
+//            inputStream.close();
+//            btImg=outputStream.toByteArray();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 //        shoper.setPicture(btImg);
 //        if(shopServiceImp.insertShop(shoper)){
 //            System.out.println("success!");
