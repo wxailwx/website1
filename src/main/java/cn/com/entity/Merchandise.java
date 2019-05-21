@@ -1,5 +1,7 @@
 package cn.com.entity;
-
+/*
+* 商品与商店之间的表是多对1的关系
+* */
 public class Merchandise extends BaseBean {
     /*
     * 商品名称

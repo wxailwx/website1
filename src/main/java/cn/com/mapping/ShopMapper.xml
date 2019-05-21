@@ -3,11 +3,34 @@
         PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.mapping.ShopMapper">
+    <!--用名字查找商家，商家名实际上不允许重复,所以同时在注册商家时使用该语句判断-->
+    <select id="findShopByName" parameterType="java.lang.String" resultType="cn.com.entity.Shoper">
+        select *from shoper where shopname=#{shopname}
+    </select>
+    <!--通过提供商家类别查找商家，返回的应该是list,后续可以修改为模糊查找-->
+    <select id="findShopByType" parameterType="java.lang.String" resultType="cn.com.entity.Shoper">
+        select *from shoper where type=#{type}
+    </select>
+    <!--添加商家，商家id为自增-->
     <insert id="insertShop" parameterType="cn.com.entity.Shoper" useGeneratedKeys="true" keyProperty="id">
         insert into shoper(shopname,address,picture,message,estimate)
         values (#{shopname},#{address},#{picture},#{message},#{estimate})
     </insert>
+    <!--通过商家id来查找商家，只能返回一个或者没有,目前并没有什么用-->
     <select id="findShopById" parameterType="java.lang.Integer" resultType="cn.com.entity.Shoper">
         select * from shoper where id=#{id};
     </select>
+    <!--更新商家信息，使用商家名定位,需要在更新前判断商家名是否已经被使用，一般为需要更新评价、星级等使用，需要对值进行判断，可能只更新部分值-->
+    <update id="updateShop" parameterType="cn.com.entity.Shoper" useGeneratedKeys="true" keyProperty="id">
+        update shoper
+        <trim prefix="set" suffixOverrides=",">
+            <if test="shopname!=null">shopname=#{shopname},</if>
+            <if test="address!=null">address=#{address},</if>
+            <if test="picture!=null">picture=#{picture},</if>
+            <if test="estimate!=null">estimate=#{estimate},</if>
+            <if test="star!=null">star=#{star},</if>
+            <if test="type!=null">type=#{type},</if>
+        </trim>
+        where shopname=#{shopname}
+    </update>
 </mapper>

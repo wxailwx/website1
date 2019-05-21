@@ -27,6 +27,30 @@ public class Shoper extends BaseBean{
     * 商店评价
     * */
     private String estimate;
+    /*
+    * 店铺星级
+    * */
+    private int star;
+    /*
+    * 店铺类别
+    * */
+    private String type;
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
