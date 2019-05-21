@@ -54,10 +54,10 @@ public class ShopDaoTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-        shoper.setPicture(btImg);
-        if(shopServiceImp.insertShop(shoper)){
-            System.out.println("success!");
-        }
-        else System.out.println("fail");
+//        shoper.setPicture(btImg);
+//        if(shopServiceImp.insertShop(shoper)){
+//            System.out.println("success!");
+//        }
+//        else System.out.println("fail");
     }
 }
