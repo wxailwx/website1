@@ -1,1 +1,7 @@
 研究开发实践课程
+框架使用的是ssm+maven，数据库用的是mysql，可以使用navicat for mysql辅助。
+直接在maven下添加包，不要直接将包导入。
+如果是第一次使用git，需要先将git下载好，再在idea上配置。
+mapper类使用的是mapping动态映射，（前端推荐使用ajax传数据）。
+数据库中存储图片的方式是存储其路径，店铺图片命名规则是images/shop/${shop_id}/... .jpg，
+商品图片的命名规则是images/shop/${shop_id}/merchandise/... .jpg
