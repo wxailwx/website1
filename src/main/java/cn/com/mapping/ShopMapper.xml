@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.mapping.ShopMapper">
+    <insert id="insertShop" parameterType="cn.com.entity.Shoper" useGeneratedKeys="true" keyProperty="id">
+        insert into shoper(shopname,address,picture,message,estimate)
+        values (#{shopname},#{address},#{picture},#{message},#{estimate})
+    </insert>
+    <select id="findShopById" parameterType="java.lang.Integer" resultType="cn.com.entity.Shoper">
+        select * from shoper where id=#{id};
+    </select>
+</mapper>
