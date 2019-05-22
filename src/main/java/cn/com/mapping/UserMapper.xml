@@ -5,7 +5,7 @@
 <mapper namespace="cn.com.mapping.UserMapper">
     <!--通过用户名查找，用户名是唯一的，注册时需要判断，登陆时使用用户名登陆-->
     <select id="findUserByName" parameterType="java.lang.String" resultType="cn.com.entity.User">
-        select * from userinformation where username = #{username}
+        select * from user where username = #{username}
     </select>
     <!--通过用户id查找-->
     <select id="findUserById" parameterType="java.lang.Integer" resultType="cn.com.entity.User">

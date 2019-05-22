@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+/*
+* 测试数据库连接
+* */
 public class DBConnectionTest {
     private String resource="spring/applicationContext.xml";
     private SqlSessionFactory sqlSessionFactory;

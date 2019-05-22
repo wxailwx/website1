@@ -13,8 +13,8 @@
     </select>
     <!--添加商家，商家id为自增-->
     <insert id="insertShop" parameterType="cn.com.entity.Shoper" useGeneratedKeys="true" keyProperty="id">
-        insert into shoper(shopname,address,picture,message,estimate)
-        values (#{shopname},#{address},#{picture},#{message},#{estimate})
+        insert into shoper(shopname,address,picture,message,estimate,type,star)
+        values (#{shopname},#{address},#{picture},#{message},#{estimate},#{type},#{star})
     </insert>
     <!--通过商家id来查找商家，只能返回一个或者没有,目前并没有什么用-->
     <select id="findShopById" parameterType="java.lang.Integer" resultType="cn.com.entity.Shoper">
