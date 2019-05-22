@@ -2,7 +2,7 @@ package cn.com.entity;
 /*
 * 商家实体类
 * */
-public class Shoper extends BaseBean{
+public class Shoper{
     /*
     * 主键
     * */

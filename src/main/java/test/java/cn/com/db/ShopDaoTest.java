@@ -24,6 +24,9 @@ public class ShopDaoTest {
     private ShopServiceImp shopServiceImp;
     @Autowired
     private MerchandiseServiceImp merchandiseServiceImp;
+    /*
+    * 测试插入商家、查询商家、更新商家
+    * */
     @Test
     public void TestInsertShop()throws Exception{
         Shoper shoper=new Shoper();
@@ -65,11 +68,15 @@ public class ShopDaoTest {
             System.out.println("更新失败！");
         }
     }
+
+    /*
+    * 测试添加指定商家的商品，如果没有商家，商品添加无效
+    * */
     @Test
     public void TestInsertMerchandise()throws Exception{
         Merchandise merchandise=new Merchandise();
-        merchandise.setName("鹅肠");
-        merchandise.setPrice(10);
+        merchandise.setName("土豆片");
+        merchandise.setPrice(5);
         merchandise.setShop_id(1);//id需要和所在的店铺的id一致,如果是不存在的店铺id,则数据库会报错，插入失败
         merchandise.setStar(3);
         //暂无图片

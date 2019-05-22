@@ -4,7 +4,7 @@ import java.sql.Date;
 /*
 * 用户实体类
 * */
-public class User extends BaseBean{
+public class User{
     /*
     * 主键
     */
