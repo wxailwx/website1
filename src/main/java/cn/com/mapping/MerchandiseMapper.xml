@@ -7,4 +7,7 @@
         insert into merchandise(name,price,address,star,shop_id)
         values (#{name},#{price},#{address},#{star},#{shop_id})
     </insert>
+    <select id="selectMerchandise" parameterType="java.lang.Integer" resultType="cn.com.entity.Merchandise">
+        select * from merchandise where shop_id=#{shop_id}
+    </select>
 </mapper>

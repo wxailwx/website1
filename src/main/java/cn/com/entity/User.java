@@ -29,9 +29,33 @@ public class User{
     * 所在学院
     * */
     private String college;
+    /*
+     * 用户访问记录
+     * */
+    private int[] history;
+    /*
+    * 使用String方式传输到数据库
+    * */
+
+    private String historyString;
+
+    public String getHistoryString() {
+        return historyString;
+    }
+
+    public void setHistoryString(String historyString) {
+        this.historyString = historyString;
+    }
 
     public Date getDate() {
         return date;
+    }
+    public int[] getHistory() {
+        return history;
+    }
+
+    public void setHistory(int[] history) {
+        this.history = history;
     }
 
     public void setDate(Date date) {
