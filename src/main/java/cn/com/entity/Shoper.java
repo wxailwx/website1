@@ -35,6 +35,18 @@ public class Shoper{
     * 店铺类别
     * */
     private String type;
+    /*
+    * 评价人数
+    * */
+    private int people;
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
+    }
 
     public int getStar() {
         return star;
