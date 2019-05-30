@@ -7,18 +7,21 @@
             url:"login.action",
             type:"post",
             data:user,
+            async:false,
             success:function (data) {
                 if(data==false){
                     alert("用户或者密码错误!");
                 }
                 else{
                     alert("登陆成功！");
+                    window.location.href="index.jsp";
                 }
             },
             error:function () {
-
+                alert("登陆失败！");
             }
         });
+
     }
     function signUser() {
         if($('#passwordSign').val()!=$('#rePasswordSign').val)
@@ -43,7 +46,7 @@
                 }
             },
             error:function (data) {
-
+                alert("注册失败！");
             }
         });
     }

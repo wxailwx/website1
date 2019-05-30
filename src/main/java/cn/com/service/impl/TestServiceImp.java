@@ -6,6 +6,8 @@ import cn.com.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestServiceImp implements TestService {
     @Autowired
@@ -27,5 +29,8 @@ public class TestServiceImp implements TestService {
     }
     public User findUserById(Integer id)throws Exception{
         return userMapper.findUserById(id);
+    }
+    public List<User> findUser()throws Exception{
+        return userMapper.findUser();
     }
 }
