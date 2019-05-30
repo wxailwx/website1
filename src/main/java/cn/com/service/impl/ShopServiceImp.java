@@ -27,4 +27,7 @@ public class ShopServiceImp implements ShopService {
     public boolean updateShop(Shoper shoper)throws Exception{
         return shopMapper.updateShop(shoper);
     }
+    public List<Shoper> findShop()throws Exception{
+        return shopMapper.findShop();
+    }
 }

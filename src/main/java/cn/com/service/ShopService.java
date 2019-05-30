@@ -10,4 +10,5 @@ public interface ShopService {
     boolean insertShop(Shoper shoper)throws Exception;
     Shoper findShopById(Integer id)throws Exception;
     boolean updateShop(Shoper shoper)throws Exception;
+    List<Shoper> findShop()throws Exception;
 }

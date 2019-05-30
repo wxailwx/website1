@@ -5,7 +5,11 @@
 <mapper namespace="cn.com.mapping.ShopMapper">
     <!--用名字查找商家，商家名实际上不允许重复,所以同时在注册商家时使用该语句判断-->
     <select id="findShopByName" parameterType="java.lang.String" resultType="cn.com.entity.Shoper">
-        select *from shoper where shopname=#{shopname}
+        select *from shoper where shopname =#{shopname}
+    </select>
+    <!--返回全部商家-->
+    <select id="findShop" resultType="cn.com.entity.Shoper">
+        select * from shoper ;
     </select>
     <!--通过提供商家类别查找商家，返回的应该是list,后续可以修改为模糊查找-->
     <select id="findShopByType" parameterType="java.lang.String" resultType="cn.com.entity.Shoper">
@@ -20,7 +24,7 @@
     <select id="findShopById" parameterType="java.lang.Integer" resultType="cn.com.entity.Shoper">
         select * from shoper where id=#{id};
     </select>
-    <!--更新商家信息，使用商家名定位,需要在更新前判断商家名是否已经被使用，一般为需要更新评价、星级等使用，需要对值进行判断，可能只更新部分值-->
+    <!--更新商家信息，使用商家名定位,需要在更新前判断商家名是否已经被使用，一般为需要更新评价、星级、价格等使用，需要对值进行判断，可能只更新部分值-->
     <update id="updateShop" parameterType="cn.com.entity.Shoper" useGeneratedKeys="true" keyProperty="id">
         update shoper
         <trim prefix="set" suffixOverrides=",">
@@ -30,6 +34,8 @@
             <if test="estimate!=null">estimate=#{estimate},</if>
             <if test="star!=null">star=#{star},</if>
             <if test="type!=null">type=#{type},</if>
+            <if test="people!=null">people=#{people},</if>
+            <if test="price!=null">price=#{price},</if>
         </trim>
         where shopname=#{shopname}
     </update>

@@ -39,7 +39,18 @@ public class Shoper{
     * 评价人数
     * */
     private int people;
+    /*
+    * 人均价格
+    * */
+    private int price;
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
     public int getPeople() {
         return people;
     }
