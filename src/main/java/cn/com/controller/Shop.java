@@ -26,21 +26,20 @@ public class Shop {
     @ResponseBody
     private List<Shoper> shops(int type)throws Exception{
         //type是按照哪种方式排序
-        System.out.println("***"+type);
+        //System.out.println("***"+type);
         List<Shoper> shopers;
         shopers=shopServiceImp.findShop();
         List<User> userList=testServiceImp.findUser();
+        //System.out.println("##"+userList.size());
         int []shop=new int[shopers.size()];
         if(type==0){//游客状态下推荐
             int [][]p=new int[userList.size()][];
             for(int j=0;j<userList.size();j++){
                 p[j]= toint(userList.get(j).getHistoryString());
+//                for (int k=0;k<p[j].length;++k)
+//                    System.out.println("$$$"+p[j][k]);
             }
             shop= shopstart2(userList.size(),shopers.size(),p);
-            for(int j=0;j<p.length;j++){
-                for(int k=0;k<p[j].length;k++)
-                    System.out.println(k);
-            }
         }
         List<Shoper> shopers1=new ArrayList<>();
         for(int j=0;j<shopers.size();++j){
