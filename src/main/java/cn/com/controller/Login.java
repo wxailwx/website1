@@ -44,4 +44,10 @@ public class Login {
             else return false;
         }
     }
+    @RequestMapping("logout.action")
+    @ResponseBody
+    private void logout()throws Exception{
+        HttpSession session=request.getSession();
+        session.removeAttribute("username");
+    }
 }
