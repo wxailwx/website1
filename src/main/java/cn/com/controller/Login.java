@@ -24,6 +24,10 @@ public class Login {
             //HttpSession session=httpServletRequest.getSession();
             HttpSession session=request.getSession();
             session.setAttribute("username",user1.getUsername());
+            session.setAttribute("password",user1.getPassword());
+            session.setAttribute("email",user1.getEmail());
+            session.setAttribute("date",user1.getDate());
+            session.setAttribute("college",user1.getCollege());
             return true;
         }
         return false;

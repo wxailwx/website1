@@ -29,7 +29,7 @@
             <if test="username!=null">username=#{username},</if>
             <if test="password!=null">password=#{password},</if>
             <if test="email!=null">email=#{email},</if>
-            <if test="date!=null">date=#{date},</if>
+<!--            <if test="date!=null">date=#{date},</if>-->
             <if test="college!=null">college=#{college},</if>
         </trim>
         where username=#{username}

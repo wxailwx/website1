@@ -1,6 +1,6 @@
 package cn.com.p1;
 
-public class Test {	
+public class Test {
 
 	public static int[] comSer1(Users a,Service[] s) {
 		int[] com=new int[100];
@@ -17,9 +17,26 @@ public class Test {
 			com[k]=s[a.historySer[i]].link[0];
 			k++;
 		}
-		return com;
+		int[] Com=new int[s.length];
+		for(i=0;i<k;i++) {
+			Com[i]=com[i];
+		}
+
+		for(int j= 0;j<s.length;j++) {
+			for(i=0,re=0;i<k;i++) {
+				if(Com[i]==j) {
+					re=1;
+				}
+			}
+			if(re==0) {
+				Com[k]=j;
+				k++;
+			}
+		}
+
+		return Com;
 	}
-	
+
 	public static int[] comShop1(Users a,Shop[] s) {
 		int[] com=new int[100];
 		int i=0,k=0,re=0,m=0;
@@ -35,7 +52,24 @@ public class Test {
 			com[k]=s[a.historyShop[i]].link[0];
 			k++;
 		}
-		return com;
+		int[] Com=new int[s.length];
+		for(i=0;i<k;i++) {
+			Com[i]=com[i];
+		}
+
+		for(int j= 0;j<s.length;j++) {
+			for(i=0,re=0;i<k;i++) {
+				if(Com[i]==j) {
+					re=1;
+				}
+			}
+			if(re==0) {
+				Com[k]=j;
+				k++;
+			}
+		}
+
+		return Com;
 	}
 	
 	public static int[] comSer2(Service[] s,Count count) {
@@ -197,10 +231,6 @@ public class Test {
 		int[] res=new int[l];
 		for(int i=0;i<l;i++) {
 			res[i]=Integer.parseInt( p[i] );
-		}
-		System.out.println("###############3");
-		for(int i=0;i<res.length;i++){
-			System.out.println("!!"+res[i]);
 		}
 		return res;
 	}
