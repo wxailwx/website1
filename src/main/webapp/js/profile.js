@@ -1,16 +1,18 @@
 (function ($) {
     function submit() {
         var user={};
-        user.username=$('#username').val();
-        user.email=$('#email').val();
-        user.college=$('#college').val();
-        user.password=$('#password').val();
+        user.username=$('#username').text();
+        user.email=$('#email').text();
+        user.college=$('#college').text();
+        user.password=$('#password').text();
+        console.log(user);
         $.ajax({
             url:"submitUser.action",
             data:user,
             success:function (data) {
                 if(data){
                     alert("提交成功");
+                    location.reload();
                 }
                 else {
                     alert("提交失败");

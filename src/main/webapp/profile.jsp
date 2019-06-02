@@ -221,13 +221,7 @@
 													<div class="profile-info-name"> 姓名 </div>
 
 													<div class="profile-info-value">
-														<span class="editable" id="username">
-															<%if (session.getAttribute("username")==null){%>
-																游客
-																<%}else{%>
-																<%=session.getAttribute("username")%>
-																<%}%>
-														</span>
+														<span class="editable"  id="username"><%if (session.getAttribute("username")==null){%>游客<%}else{%><%=session.getAttribute("username")%><%}%></span>
 													</div>
 												</div>
 
@@ -235,41 +229,25 @@
 													<div class="profile-info-name"> 加入社区时间 </div>
 
 													<div class="profile-info-value">
-														<span class="editable" id="date">
-															<%if (session.getAttribute("username")!=null){%>
-															<%=session.getAttribute("date")%>
-															<%}%>
-														</span>
+														<span class="editable" id="date"><%if (session.getAttribute("username")!=null){%><%=session.getAttribute("date")%><%}%></span>
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> 邮箱 </div>
 													<div class="profile-info-value">
-														<span class="editable" id="email">
-															<%if (session.getAttribute("username")!=null){%>
-															<%=session.getAttribute("email")%>
-															<%}%>
-														</span>
+														<span class="editable" id="email"><%if (session.getAttribute("username")!=null){%><%=session.getAttribute("email")%><%}%></span>
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> 学院 </div>
 													<div class="profile-info-value">
-														<span class="editable" id="college">
-															<%if (session.getAttribute("username")!=null){%>
-															<%=session.getAttribute("college")%>
-															<%}%>
-														</span>
+														<span class="editable" id="college"><%if (session.getAttribute("username")!=null){%><%=session.getAttribute("college")%><%}%></span>
 													</div>
 												</div>
 												<div class="profile-info-row">
 													<div class="profile-info-name"> 密码 </div>
 													<div class="profile-info-value">
-														<span class="editable" id="password">
-															<%if (session.getAttribute("username")!=null){%>
-															<%=session.getAttribute("password")%>
-															<%}%>
-														</span>
+														<span class="editable" id="password"><%if (session.getAttribute("username")!=null){%><%=session.getAttribute("password")%><%}%></span>
 													</div>
 												</div>
 												<div class="profile-info-row">
@@ -526,6 +504,18 @@
 				});
 			
 				$('a[ data-original-title]').tooltip();
+                $('#logout').click(function () {
+                    $.ajax({
+                        url:"logout.action",
+                        success:function () {
+                            console.log("success!");
+                            location.reload();
+                        },
+                        error:function (res) {
+                            console.log(res);
+                        }
+                    });
+                });
 			});
 		</script>
 	<script type="text/javascript" src="js/profile.js"></script>
