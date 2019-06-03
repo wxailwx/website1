@@ -1,8 +1,10 @@
 package cn.com.controller;
 
+import cn.com.entity.Merchandise;
 import cn.com.entity.Shoper;
 import cn.com.entity.User;
 import cn.com.p1.Test;
+import cn.com.service.impl.MerchandiseServiceImp;
 import cn.com.service.impl.ShopServiceImp;
 import cn.com.service.impl.TestServiceImp;
 import org.json.JSONArray;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import static cn.com.p1.Test.*;
@@ -22,6 +25,10 @@ public class Shop {
     private ShopServiceImp shopServiceImp;
     @Autowired
     private TestServiceImp testServiceImp;
+    @Autowired
+    private MerchandiseServiceImp merchandiseServiceImp;
+    @Autowired
+    private HttpServletRequest request;
     @RequestMapping("shops.action")
     @ResponseBody
     private List<Shoper> shops(int type)throws Exception{
@@ -54,5 +61,15 @@ public class Shop {
         List<Shoper> shoperList=new ArrayList<>();
         shoperList.add(shoper1);
         return shoperList;
+    }
+    @RequestMapping("merchandise.action")
+    @ResponseBody
+    private List<Merchandise> searchMerchandise(int id)throws Exception{
+        return merchandiseServiceImp.selectMerchandise(id);
+    }
+    @RequestMapping("searchone.action")
+    @ResponseBody
+    private Shoper searchone (int id)throws Exception{
+        return shopServiceImp.findShopById(id);
     }
 }

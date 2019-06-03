@@ -75,13 +75,6 @@
               <i class="ace-icon fa fa-caret-down"></i>
             </a>
             <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-<%--              <li>--%>
-<%--              <a href="#">--%>
-<%--                <i class="ace-icon fa fa-cog"></i>--%>
-<%--                Settings--%>
-<%--              </a>--%>
-<%--            </li>--%>
-
               <li>
               <a href="profile.jsp" >
                 <i class="ace-icon fa fa-user"></i>
@@ -190,7 +183,9 @@
               {{# layui.each(d,function(index,item){}}
                 <div class="item">
                   <div class="img">
-                    <a href="javascript:"><img src="{{item.picture}}" width="280px" height="280px"></a>
+                    <a href="javascript:" id="{{item.id}}" onclick="jump(this.id)">
+                      <img src="{{item.picture}}" width="280px" height="280px">
+                    </a>
                   </div>
                   <div class="text">
                     <p class="title">{{item.shopname}}</p>
@@ -238,6 +233,11 @@
 <script src="wx/assets/js/ace-elements.min.js"></script>
 <script src="wx/assets/js/ace.min.js"></script>
   <script src="js/jquerysession.js"></script>
+  <script>
+    function jump(id) {
+      window.location.href="shopimf3.jsp?id="+id;
+    }
+  </script>
 <script>
 
   layui.config({
@@ -261,7 +261,6 @@
         async:false,
         data:num,
         success:function (res) {
-          console.log("1");
           listCont.innerHTML=mm.renderHtml(html,res);
         },
         error:function (res) {
@@ -280,23 +279,6 @@
         $(this).attr('off',true)
       }
     });
-    // $('#search').on('click',function () {
-    //   //var shopname=$('#shopname').val();
-    //   var shop={};
-    //   shop.shopname=$('#shopname').val();
-    //   $.ajax({
-    //     url:"searchshop.action",
-    //     type:"post",
-    //     data:shop,
-    //     success:function (res) {
-    //       console.log("2");
-    //       listCont.innerHTML=mm.renderHtml(html,res);
-    //     },
-    //     error:function (res) {
-    //       console.log(res);
-    //     }
-    //   });
-    // });
     $('#search').click(function () {
       var shop={};
       shop.shopname=$('#shopname').val();
