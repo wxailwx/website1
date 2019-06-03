@@ -18,4 +18,7 @@ public class MerchandiseServiceImp implements MerchandiseService {
     public List<Merchandise> selectMerchandise(int shop_id)throws Exception{
         return merchandiseMapper.selectMerchandise(shop_id);
     }
+    public boolean updateMerchandise(Merchandise merchandise)throws Exception{
+        return merchandiseMapper.updateMerchandise(merchandise);
+    }
 }

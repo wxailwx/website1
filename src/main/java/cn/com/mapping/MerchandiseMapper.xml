@@ -10,4 +10,7 @@
     <select id="selectMerchandise" parameterType="java.lang.Integer" resultType="cn.com.entity.Merchandise">
         select * from merchandise where shop_id=#{shop_id}
     </select>
+    <update id="updateMerchandise" parameterType="cn.com.entity.Merchandise" useGeneratedKeys="true" keyProperty="id">
+        update merchandise where id=#{id}
+    </update>
 </mapper>

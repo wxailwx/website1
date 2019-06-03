@@ -7,4 +7,5 @@ import java.util.List;
 public interface MerchandiseService {
     boolean insertMerchandise(Merchandise merchandise)throws Exception;
     List<Merchandise> selectMerchandise(int shop_id)throws Exception;
+    boolean updateMerchandise(Merchandise merchandise)throws Exception;
 }

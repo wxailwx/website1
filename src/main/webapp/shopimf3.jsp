@@ -176,10 +176,17 @@
         </div>
       </div>
       <div class="layui-form-item">
+        <label class="layui-form-label b">消费价格</label>
+        <div class="layui-input-block">
+          <input type="number" name="price" required lay-verify="required" placeholder="价格" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
         <label class="layui-form-label b">店铺意见</label>
         <div class="layui-input-block">
           <textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea c"></textarea>
         </div>
+
       </div>
     </form>
   </div>
