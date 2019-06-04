@@ -168,14 +168,10 @@
         <div class="right-cont-wrap">
           <div class="right-cont">
             <div class="sort layui-clear">
-              <a class="active" href="javascript:" event = 'volume'>销量</a>
-              <a href="javascript:" event = 'price'>价格</a>
-              <a href="javascript:" event = 'newprod'>新品</a>
-              <a href="javascript:" event = 'collection'>收藏</a>
+              <a class="active" href="javascript:" id = 'volume'>推荐</a>
+              <a href="javascript:" id = 'people'>人气</a>
+              <a href="javascript:" id = 'price'>价格</a>
             </div>
-<!--            <div class="prod-number">-->
-<!--              <span>200个</span>-->
-<!--            </div>-->
             <div class="cont-list layui-clear" id="list-cont">
             </div>
             <!-- 模版引擎导入 -->
@@ -251,6 +247,20 @@
       });
     var num={};
     num.type=1;
+    function shop() {
+      $.ajax({
+        url:"shops.action",
+        type:"post",
+        async:false,
+        data:num,
+        success:function (res) {
+          listCont.innerHTML=mm.renderHtml(html,res);
+        },
+        error:function (res) {
+          console.log(res);
+        }
+      });
+    }
     // 模版引擎导入
     var html = demo.innerHTML;
     var listCont = document.getElementById('list-cont');
@@ -307,6 +317,18 @@
           console.log(res);
         }
       });
+    });
+    $('#volume').click(function () {
+      num.type=1;
+      shop();
+    });
+    $('#people').click(function () {
+      num.type=2;
+      shop();
+    });
+    $('#price').click(function () {
+      num.type=3;
+      shop();
     });
 });
 </script>

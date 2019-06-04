@@ -7,8 +7,6 @@ import cn.com.p1.Test;
 import cn.com.service.impl.MerchandiseServiceImp;
 import cn.com.service.impl.ShopServiceImp;
 import cn.com.service.impl.TestServiceImp;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +31,9 @@ public class Shop {
     @ResponseBody
     private List<Shoper> shops(int type)throws Exception{
         //type是按照哪种方式排序
-        //System.out.println("***"+type);
         List<Shoper> shopers;
         shopers=shopServiceImp.findShop();
         List<User> userList=testServiceImp.findUser();
-        //System.out.println("##"+userList.size());
         int []shop=new int[shopers.size()];
         if(type==1){//游客状态下推荐
             int [][]p=new int[userList.size()][];
@@ -46,12 +42,33 @@ public class Shop {
                 p[j]= toint(userList.get(j).getHistoryString());
             }
             shop= shopstart2(userList.size(),shopers.size(),p);
+            List<Shoper> shopers1=new ArrayList<>();
+            for(int j=0;j<shopers.size();++j){
+                shopers1.add(shopers.get(shop[j]));
+            }
+            return shopers1;
         }
-        List<Shoper> shopers1=new ArrayList<>();
-        for(int j=0;j<shopers.size();++j){
-            shopers1.add(shopers.get(shop[j]));
+        else if (type==2){//按人数排序
+            Collections.sort(shopers, new Comparator<Shoper>() {
+                @Override
+                public int compare(Shoper o1, Shoper o2) {
+                    if(o1.getPeople()>o2.getPeople())
+                        return 1;
+                    else return 0;
+                }
+            });
         }
-        return shopers1;
+        else if (type==3){
+            Collections.sort(shopers, new Comparator<Shoper>() {
+                @Override
+                public int compare(Shoper o1, Shoper o2) {
+                    if(o1.getPrice()<o2.getPrice())
+                        return 1;
+                    else return 0;
+                }
+            });
+        }
+        return shopers;
     }
     @RequestMapping("searchshop.action")
     @ResponseBody

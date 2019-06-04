@@ -24,6 +24,7 @@ public class Login {
             //HttpSession session=httpServletRequest.getSession();
             HttpSession session=request.getSession();
             session.setAttribute("username",user1.getUsername());
+            session.setAttribute("id",user1.getId());
             session.setAttribute("password",user1.getPassword());
             session.setAttribute("email",user1.getEmail());
             session.setAttribute("date",user1.getDate());

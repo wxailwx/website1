@@ -49,7 +49,14 @@
       <ul class="nav ace-nav">
         <li class="grey dropdown-modal"> <a class="dropdown-toggle" href="login.html"> <i class="ace-icon fa fa-tasks"></i> <span>登陆&注册</span> </a> </li>
         <li class="purple dropdown-modal"> <a  class="dropdown-toggle" href="contactus2.html"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span>联系我们</span> </a> </li>
-        <li class="light-blue dropdown-modal"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="wx/assets/images/avatars/user.jpg" alt="Jason's Photo" /> <span class="user-info"> <small>Welcome,</small> Jason </span> <i class="ace-icon fa fa-caret-down"></i> </a>
+        <li class="light-blue dropdown-modal"> <a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="wx/assets/images/avatars/user.jpg" alt="Jason's Photo" />
+          <span class="user-info"> <small>Welcome,</small>
+            <%if (session.getAttribute("username")==null){%>
+                游客
+                <%}else{%>
+                <%=session.getAttribute("username")%>
+                <%}%>
+          </span> <i class="ace-icon fa fa-caret-down"></i> </a>
           <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
             <li> <a href="#"> <i class="ace-icon fa fa-cog"></i> Settings </a> </li>
             <li> <a href="profile.jsp"> <i class="ace-icon fa fa-user"></i> Profile </a> </li>
@@ -110,7 +117,7 @@
             <div class="profile-info-value"> <span class="editable" id="about1"></span> </div>
           </div>
           <div class="profile-info-row">
-            <div class="profile-info-name"> 店铺简评 </div>
+            <div class="profile-info-name"> 店铺评分 </div>
             <div class="profile-info-value"> <span class="editable" id="about2"></span> </div>
           </div>
         </div>
@@ -136,10 +143,16 @@
       </div>
       <div class="detail">
         <h4>评价</h4>
-        <div class="profile-info-row">
-          <div class="profile-info-name"> 用户123 </div>
-          <div class="profile-info-value"> <span class="editable">我觉得很不错，价格合适。</span> </div>
+        <div class="cont-list layui-clear" id="list-cont1">
         </div>
+        <script type="text/html" id="demo1">
+          {{# layui.each(d,function(index,item){}}
+          <div class="profile-info-row">
+          <div class="profile-info-name"> {{item.username}} </div>
+          <div class="profile-info-value"> <span class="editable">{{item.judge}}</span> </div>
+          </div>
+          {{# }); }}
+        </script>
       </div>
     </div>
   </div>
@@ -150,17 +163,21 @@
       <div class="layui-form-item">
         <label class="layui-form-label b">店铺打星</label>
         <div class="layui-input-block">
-          <div id="star1"></div>
+          <div id="star1"><span class="hidden" id="span"></span></div>
           <script src="res/layui/layui.js"></script>
           <script>
             layui.use('rate', function(){
               var rate = layui.rate;
               //渲染
               var ins1 = rate.render({
-                elem: '#star1'  //绑定元素
+                elem: '#span',  //绑定元素
+                choose:function (value) {
+                  alert(value);
+                  document.getElementById("span").innerText=value;
+                }
               });
               rate.render({
-                elem: '#test1'
+                elem: '#star1'
                 ,setText: function(value){
                   var arrs = {
                     '1': '极差'
@@ -177,16 +194,20 @@
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label b">消费价格</label>
-        <div class="layui-input-block">
-          <input type="number" name="price" required lay-verify="required" placeholder="价格" autocomplete="off" class="layui-input">
+        <div class="layui-input-block b">
+          <input id="price" type="number" name="price" required lay-verify="required" placeholder="价格" autocomplete="off" class="layui-input">
         </div>
       </div>
       <div class="layui-form-item">
         <label class="layui-form-label b">店铺意见</label>
         <div class="layui-input-block">
-          <textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea c"></textarea>
+          <textarea id="idea" name="" required lay-verify="required" placeholder="请输入" class="layui-textarea c"></textarea>
         </div>
 
+      </div>
+      <div>
+        <button type="button" id="submit">提交</button>
+        <button type="reset">重设</button>
       </div>
     </form>
   </div>
@@ -195,6 +216,7 @@
       document.getElementById('show').style.display='none'">返回商家页面</a>
   </div>
 </div>
+<script src="js/jquerysession.js"></script>
 <!--[if !IE]> -->
 <script src="wx/assets/js/jquery-2.1.4.min.js"></script>
 <!-- <![endif]-->
@@ -280,6 +302,21 @@
       }
     });
 
+    //获取到评论信息
+    var listCont1=document.getElementById('list-cont1');
+    var html1=demo1.innerHTML;
+    $.ajax({
+      url:"serachJudge.action",
+      data:num,
+      success:function (data) {
+        listCont1.innerHTML=mm.renderHtml(html1,data);
+      },
+      error:function (data) {
+        console.log(data);
+      }
+    });
+
+    //搜索商家
     $('#search').click(function () {
       var shop={};
       shop.shopname=$('#shopname').val();
@@ -297,6 +334,7 @@
         }
       });
     });
+    //下线
     $('#logout').click(function () {
       $.ajax({
         url:"logout.action",
@@ -309,6 +347,7 @@
         }
       });
     });
+    //点评
     $('#dianping').click(function () {
       document.getElementById('body').style.display='none';
       document.getElementById('show').style.display='block';
@@ -327,6 +366,31 @@
         },
         error:function (res) {
           console.log(111);
+        }
+      });
+    });
+    //提交点评
+    $('#submit').click(function () {
+      var judge={};
+      judge.shoperid=num.id;
+      //judge.star=$('#star1').val();
+      judge.star=3;
+      judge.judge=$('#idea').val();
+      judge.price=$('#price').val();
+      $.ajax({
+        url:"insertJudge.action",
+        data:judge,
+        success:function (data) {
+          if(data==false){
+            alert("请先登陆");
+            window.location.href="login.html";
+          }
+          else {
+            location.reload();
+          }
+        },
+        error:function (data) {
+          console.log(data);
         }
       });
     });

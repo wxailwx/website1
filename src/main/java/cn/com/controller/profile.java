@@ -18,6 +18,7 @@ public class profile {
     private HttpServletRequest request;
     @RequestMapping("submitUser.action")
     @ResponseBody
+    //更新用户信息
     private boolean submitUser(User user)throws Exception{
         if(testServiceImp.updateUser(user)){
             User user1=testServiceImp.findUserByName(user.getUsername());

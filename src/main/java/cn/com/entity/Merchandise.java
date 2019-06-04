@@ -27,6 +27,18 @@ public class Merchandise{
     * 商品所属店家,需要和商家的id一致
     * */
     private int shop_id;
+    /*
+    * 评价人数
+    * */
+    private int people;
+
+    public int getPeople() {
+        return people;
+    }
+
+    public void setPeople(int people) {
+        this.people = people;
+    }
 
     public String getName() {
         return name;
