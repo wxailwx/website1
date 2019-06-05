@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 import static cn.com.p1.Test.*;
@@ -36,15 +37,26 @@ public class Shop {
         List<User> userList=testServiceImp.findUser();
         int []shop=new int[shopers.size()];
         if(type==1){//游客状态下推荐
-            int [][]p=new int[userList.size()][];
-            for(int j=0;j<userList.size();j++){
-                System.out.println("1111111");
-                p[j]= toint(userList.get(j).getHistoryString());
-            }
-            shop= shopstart2(userList.size(),shopers.size(),p);
+            HttpSession session=request.getSession();
             List<Shoper> shopers1=new ArrayList<>();
-            for(int j=0;j<shopers.size();++j){
-                shopers1.add(shopers.get(shop[j]));
+            if (session.getAttribute("username")==null){
+                int [][]p=new int[userList.size()][];
+                for(int j=0;j<userList.size();j++){
+                    p[j]= toint(userList.get(j).getHistoryString());
+                }
+                shop= shopstart2(userList.size(),shopers.size(),p);
+                for(int j=0;j<shopers.size();++j){
+                    shopers1.add(shopers.get(shop[j]));
+                }
+            }else {
+                int [][]p=new int[userList.size()][];
+                for(int j=0;j<userList.size();j++){
+                    p[j]= toint(userList.get(j).getHistoryString());
+                }
+                shop=shopstart1(userList.size(),shopers.size(),(int)session.getAttribute("id"),p);
+                for(int j=0;j<shopers.size();++j){
+                    shopers1.add(shopers.get(shop[j]));
+                }
             }
             return shopers1;
         }

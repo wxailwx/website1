@@ -58,10 +58,14 @@
                 <%}%>
           </span> <i class="ace-icon fa fa-caret-down"></i> </a>
           <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-            <li> <a href="#"> <i class="ace-icon fa fa-cog"></i> Settings </a> </li>
             <li> <a href="profile.jsp"> <i class="ace-icon fa fa-user"></i> Profile </a> </li>
             <li class="divider"></li>
-            <li> <a href="#"> <i class="ace-icon fa fa-power-off"></i> Logout </a> </li>
+            <li>
+                <a href="#" id="logout">
+                    <i class="ace-icon fa fa-power-off"></i>
+                Logout
+                </a>
+            </li>
           </ul>
         </li>
       </ul>
