@@ -30,7 +30,7 @@ public class Shop {
     private HttpServletRequest request;
     @RequestMapping("shops.action")
     @ResponseBody
-    private List<Shoper> shops(int type)throws Exception{
+    private List<Shoper> shops(final int type)throws Exception{
         //type是按照哪种方式排序
         List<Shoper> shopers;
         shopers=shopServiceImp.findShop();
@@ -57,29 +57,40 @@ public class Shop {
                 for(int j=0;j<shopers.size();++j){
                     shopers1.add(shopers.get(shop[j]));
                 }
+
             }
             return shopers1;
         }
-        else if (type==2){//按人数排序
+        else{//按人数、价格排序
             Collections.sort(shopers, new Comparator<Shoper>() {
                 @Override
                 public int compare(Shoper o1, Shoper o2) {
-                    if(o1.getPeople()>o2.getPeople())
-                        return 1;
-                    else return 0;
+                    if(type==2)
+                    {
+                        if(o1.getPeople() < o2.getPeople())
+                            return 1;
+                        else if(o1.getPeople()==o2.getPeople())return 0;
+                        else return -1;
+                    }
+                    else{
+                        if(o1.getPrice() > o2.getPrice())
+                            return 1;
+                        else if(o1.getPrice()==o2.getPrice())return 0;
+                        else return -1;
+                    }
                 }
             });
         }
-        else if (type==3){
-            Collections.sort(shopers, new Comparator<Shoper>() {
-                @Override
-                public int compare(Shoper o1, Shoper o2) {
-                    if(o1.getPrice()<o2.getPrice())
-                        return 1;
-                    else return 0;
-                }
-            });
-        }
+//        else if (type==3){
+//            Collections.sort(shopers, new Comparator<Shoper>() {
+//                @Override
+//                public int compare(Shoper o1, Shoper o2) {
+//                    if(o1.getPrice()<o2.getPrice())
+//                        return 1;
+//                    else return 0;
+//                }
+//            });
+//        }
         return shopers;
     }
     @RequestMapping("searchshop.action")

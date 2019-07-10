@@ -64,7 +64,7 @@ public class UserDaoTest {
         user.setEmail("222@123.com");
         user.setCollege("生物");
         user.setPassword("222");
-        user.setUsername("杜月笙");
+        user.setUsername("张三");
         User user1=testService.findUserByName(user.getUsername());
         if(user1==null){
             System.out.println("该用户不存在。更新失败！");
