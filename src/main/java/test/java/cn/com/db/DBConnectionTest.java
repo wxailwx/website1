@@ -1,11 +1,8 @@
 package test.java.cn.com.db;
 
-import cn.com.entity.User;
-import cn.com.mapping.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 /*
 * 测试数据库连接
@@ -34,14 +31,5 @@ public class DBConnectionTest {
         else{
             System.out.println("数据库连接失败");
         }
-    }
-    @Test
-    public void testSelect()throws Exception{
-        sqlSession=getSqlSession();
-        User user=sqlSession.selectOne("cn.com.mapping.UserMapper.findUserByName","张三");
-        System.out.println("取出的用户信息：");
-        System.out.println("ID:"+user.getId());
-        System.out.println("password:"+user.getPassword());
-        System.out.println("username"+user.getUsername());
     }
 }
