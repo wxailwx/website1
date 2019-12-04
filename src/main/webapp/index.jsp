@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>医疗平台</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="layui/layui.all.js">
     <link rel="stylesheet" href="layui/css/layui.css">
@@ -23,8 +24,8 @@
     <div class="layui-body">
         <ul class="layui-nav layui-bg-green" lay-filter="">
             <li class="layui-nav-item"><a href="index.jsp">首页</a></li>
-            <li class="layui-nav-item layui-this"><a href="doctor.jsp">医院</a></li>
-            <li class="layui-nav-item"><a href="">医生</a></li>
+            <li class="layui-nav-item layui-this"><a href="hospital.jsp">医院</a></li>
+            <li class="layui-nav-item"><a href="doctor.jsp">医生</a></li>
         </ul>
         <hr class="layui-bg-green">
         <div class="layui-row">
@@ -60,33 +61,34 @@
 </script>
 <script>
     var table = layui.table;
-
-    //执行渲染
     table.render({
         elem: '#hospital' //指定原始表格元素选择器（推荐id选择器）
         ,height: 315 //容器高度
         ,width:800
+        ,url:"Hospital.action"
         ,cols: [[
             {field:'name',title:'医院名',width:200}
             ,{field:'address',title:'医院地址',width:200}
-            ,{field:'class',title:'医院等级',width:100}
+            ,{field:'class1',title:'医院等级',width:100}
             ,{field:'introduction',title:'医院简介',width:300}
         ]] //设置表头
         ,page:true
+        ,method:"POST"
     });
 </script>
 <script>
     var table11 = layui.table;
     table11.render({
        elem:'#doctor'
-       ,height:315
-        ,width:500
-       ,cols:[[
+        ,height:315
+        ,width:300
+        ,url:"DoctorName.action"
+        ,cols:[[
             {field:'name',title:'医生名',width:100}
-            ,{field:'address',title:'工作医院',width:200}
             ,{field:'profession',title:'职称',width:200}
         ]]
-       ,page:true
+        ,page:true
+        ,method:'POST'
     });
 </script>
 <script>
