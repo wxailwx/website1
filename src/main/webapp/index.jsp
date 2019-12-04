@@ -17,7 +17,7 @@
             </div>
             <div class="layui-col-md-offset5 ">
                 <input type="text" name="hospital-name" placeholder="请输入医院名称" value="" id="search-hospital" size="50px" style="height: 40px">
-                <button type="button" class="layui-btn"><i class="layui-icon layui-icon-search"></i> </button>
+                <button id="search" type="button" class="layui-btn"><i class="layui-icon layui-icon-search"></i> </button>
             </div>
         </div>
     </div>
@@ -65,6 +65,7 @@
         elem: '#hospital' //指定原始表格元素选择器（推荐id选择器）
         ,height: 315 //容器高度
         ,width:800
+        ,id:'table'
         ,url:"Hospital.action"
         ,cols: [[
             {field:'name',title:'医院名',width:200}
@@ -75,6 +76,19 @@
         ,page:true
         ,method:"POST"
     });
+</script>
+<script>
+    var $ = layui.$;
+    $('#search').on('click',function () {
+        console.log("22");
+        var send_name = $('#search-hospital').val();
+        table11.reload('table',{
+            method:'post'
+            ,where:{
+                'name':send_name
+            }
+        })
+    })
 </script>
 <script>
     var table11 = layui.table;
