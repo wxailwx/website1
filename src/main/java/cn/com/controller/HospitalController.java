@@ -19,6 +19,7 @@ public class HospitalController {
     @RequestMapping(value="Hospital.action",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     private String findHospital(int page,int limit,String name)throws Exception{
+        //System.out.println(page);
         List<Hospital> list;
         if(name==null){
             list = hospitalServiceImp.findHospital();
@@ -28,8 +29,9 @@ public class HospitalController {
             list = hospitalServiceImp.findHospitalByName(name);
         }
         int count = list.size();
-        List<HospitalShow> list1 = HChangeToS.HChangeToS(list);
+        List<HospitalShow> list1 = HChangeToS.HChangeToS(page,limit,list);
         String js = HChangeToS.ChangeToString(list1);
+        System.out.println(js);
         String jso = "{\"code\":0,\"msg\":\"\",\"count\":"+count+",\"data\":"+js+"}";
         return jso;
     }

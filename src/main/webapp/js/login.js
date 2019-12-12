@@ -24,15 +24,17 @@
 
     }
     function signUser() {
-        if($('#passwordSign').val()!=$('#rePasswordSign').val)
+        var password = $('#passwordSign').val();
+        var repassword = $('#rePasswordSign').val();
+        console.log(password);
+        console.log(repassword);
+        if(password != repassword)
         {
-            alert("密码不一致!");
+            alert("密码不一致!"+password+" "+repassword);
             return;
         }
         user.username=$('#usernameSign').val();
         user.password=$('#passwordSign').val();
-        user.college=$('#collegeSign').val();
-        user.email=$('#emailSign').val();
         $.ajax({
             url:"sign.action",
             type:"post",

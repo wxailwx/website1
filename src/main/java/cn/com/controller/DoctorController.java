@@ -21,12 +21,16 @@ public class DoctorController {
     @RequestMapping(value="DoctorName.action",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     private String findDoctorByName(int page,int limit,String name)throws Exception{
+//        String[] source = name.split(" ");
+//        String newname="";
         List<Doctor> doctorList;
         if (name==null)
             doctorList = doctorServiceImp.findDoctor();
         else
         {
-            System.out.println(name);
+//            for(int i=0;i<source.length;i++){
+//                newname+=source[i];
+//            }
             doctorList = doctorServiceImp.findDoctorByName(name);
         }
 //        Collections.sort(doctorList, new Comparator<Doctor>() {
@@ -35,17 +39,25 @@ public class DoctorController {
 //                return 1;
 //            }
 //        });
-        System.out.println(doctorList.get(0).getName());
-        System.out.println(doctorList.get(0).getDID());
-        LinkedList<DoctorShow> doctorShows = DChangeToS.DChangeToS(doctorList);
-        System.out.println(doctorShows.size());
-
-        int count = doctorShows.size();
-        String js= DChangeToS.ChangeToString(doctorShows);
-        System.out.println(js);
-        String jso = "{\"code\":0,\"msg\":\"\",\"count\":"+count+",\"data\":"+js+"}";
-        //System.out.println("1"+jso);
-        //String jso = "{\"code\":0,\"msg\":\"\",\"count\":"+"1"+",\"data\":"+"[{\"name\":\"刘山\",\"profession\":\"教授\"}]"+"}";
-        return jso;
+        return DChangeToS.DoctorToString(page,limit,doctorList);
+    }
+    @RequestMapping(value = "DoctorFaculty.action",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    private String findDoctorByOffic(int page,int limit,String name)throws Exception{
+        System.out.println(name);
+        List<Doctor> list ;
+        if(name == null)
+            list = doctorServiceImp.findDoctor();
+        else list = doctorServiceImp.findDoctorByOffice(name);
+        return DChangeToS.DoctorToString(page,limit,list);
+    }
+    @RequestMapping(value = "DoctorDetail.action",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    private Doctor DoctorDetail(String id)throws Exception{
+        System.out.println(id);
+        Doctor doctor = doctorServiceImp.doctorDetail(id);
+        System.out.println("111");
+        System.out.println(doctor.getName());
+        return doctor;
     }
 }

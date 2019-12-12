@@ -22,4 +22,12 @@ public class DoctorServiceImp implements DoctorService {
     public List<Doctor> findDoctor() throws Exception{
         return doctorMapper.findDoctor();
     }
+    @Override
+    public List<Doctor> findDoctorByOffice(String name)throws Exception{
+        return doctorMapper.findDoctorByOffice(name);
+    }
+    @Override
+    public Doctor doctorDetail(String id)throws Exception{
+        return doctorMapper.doctorDetail(id);
+    }
 }

@@ -4,9 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.mapping.DoctorMapper">
     <select id="findDoctorByName" parameterType="java.lang.String" resultType="cn.com.entity.Doctor">
-        select * from doctor where name like CONCAT('%',#{name},'%') limit 1,20
+        select * from doctor where
+            name like CONCAT('%',#{name},'%')
+            or pingying like CONCAT('%',#{name},'%')
+            or full_surname like CONCAT('%',#{name},'%')
+            or abbre_surname like CONCAT('%',#{name},'%')
+            or full_firstname like CONCAT('%',#{name},'%')
+            or abbre_firstname like CONCAT('%',#{name},'%')
+            or description like concat('%',#{name},'%')
+            limit 1,20
     </select>
     <select id="findDoctor" resultType="cn.com.entity.Doctor">
-        select * from doctor limit 1,20
+        select * from doctor limit 1,100
+    </select>
+    <select id="findDoctorByOffice" parameterType="java.lang.String" resultType="cn.com.entity.Doctor">
+        select * from doctor where faculty like CONCAT('%',#{name},'%') limit 1,100
+    </select>
+    <select id="doctorDetail" parameterType="java.lang.String" resultType="cn.com.entity.Doctor">
+        select * from doctor where DID = #{id}
     </select>
 </mapper>

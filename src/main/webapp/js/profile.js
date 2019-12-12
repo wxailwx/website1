@@ -2,9 +2,8 @@
     function submit() {
         var user={};
         user.username=$('#username').text();
-        user.email=$('#email').text();
-        user.college=$('#college').text();
         user.password=$('#password').text();
+        user.usercase=$('#usercase').text();
         console.log(user);
         $.ajax({
             url:"submitUser.action",

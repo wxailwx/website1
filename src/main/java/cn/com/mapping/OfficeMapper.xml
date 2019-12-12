@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.mapping.OfficeMapper">
+    <select id="findOffice" resultType="cn.com.entity.Office">
+        select * from office limit 1,20
+    </select>
+    <select id="findTip" resultType="cn.com.entity.Tip">
+        select * from notice limit 1,20
+    </select>
+    <select id="findTipByName" parameterType="java.lang.String" resultType="cn.com.entity.Tip">
+        select * from notice where name like concat('%',#{name},'%') limit 1,20
+    </select>
+    <insert id="insertUser" parameterType="cn.com.entity.User" useGeneratedKeys="true" keyProperty="userid">
+        insert into user(username,password,usercase)
+        values(#{username},#{password},#{usercase})
+    </insert>
+    <update id="updateUser" parameterType="cn.com.entity.User">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username!=null">username=#{username},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="usercase!=null">usercase=#{usercase}</if>
+            <!--            <if test="date!=null">date=#{date},</if>-->
+        </trim>
+        where userid=#{userid}
+    </update>
+    <select id="findUser" parameterType="java.lang.String" resultType="cn.com.entity.User">
+        select * from user where username = #{username}
+    </select>
+<!--    收藏医生-->
+    <select id="findUserFavDoc" parameterType="java.lang.Integer" resultType="cn.com.entity.Doctor">
+        select * from doctor a where a.DID in (select DID from userfovdoc where userid = #{userid})
+    </select>
+    <insert id="insertUserFavDoc" parameterType="cn.com.entity.UserFavDoc">
+        insert into userfovdoc(userid,DID)
+        values (#{userid},#{DID})
+    </insert>
+    <delete id="deleteUserFavDoc" parameterType="cn.com.entity.UserFavDoc">
+        delete from userfovdoc where userid = #{userid} and DID = #{DID}
+    </delete>
+<!--    收藏医院-->
+    <select id="findUserFavHos" parameterType="java.lang.Integer" resultType="cn.com.entity.Hospital">
+        select * from hospital a where a.HID in (select HID from userfovhos where userid = #{userid})
+    </select>
+    <insert id="insertUserFavHos" parameterType="cn.com.entity.UserFavHos">
+        insert into userfovhos(userid,HID)
+        values (#{userid},#{HID})
+    </insert>
+    <delete id="deleteUserFavHos" parameterType="cn.com.entity.UserFavHos">
+        delete from userfovhos where userid = #{userid} and HID = #{HID}
+    </delete>
+</mapper>
